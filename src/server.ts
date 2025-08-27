@@ -1,15 +1,8 @@
-import express, { Request, Response } from 'express';
+import createApp from "./app";
 
-const app = express();
+const app = createApp();
 const port = process.env.PORT;
 
-// midleware 
-app.use(express.json())     
-
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({ player: "beckham" });
+app.listen(port, () => {
+  console.log(`⚡ Server is running at port http://localhost:${port}`);
 });
-
-app.listen(port);
-console.log(`⚡ Server is running at port http://localhost:${port}`);
-
