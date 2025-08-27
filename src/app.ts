@@ -1,4 +1,5 @@
 import express, { Request, Response} from "express";
+import { getPlayer } from "./controllers/players-controller";
 
 function createApp(){
 
@@ -6,10 +7,9 @@ function createApp(){
         
         app.use(express.json());     // midleware para interpretar json
 
-        app.get('/', (req: Request, res: Response) => {
-            res.status(200).json({ player: "Retomei_deste_ponto"})
-});
-         return app
-}
+        app.get('/', getPlayer);
+
+        return app;
+};
 
 export default createApp;
