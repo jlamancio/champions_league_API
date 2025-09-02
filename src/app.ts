@@ -1,5 +1,5 @@
-import express, { Request, Response} from "express";
-import { getPlayer } from "./controllers/players-controller";
+import express from "express";
+import router from "./routes";
 
 function createApp(){
 
@@ -7,7 +7,7 @@ function createApp(){
         
         app.use(express.json());     // midleware para interpretar json
 
-        app.get('/', getPlayer);
+        app.use('/api/v1', router);
 
         return app;
 };
