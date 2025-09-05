@@ -1,4 +1,5 @@
-export interface PlayerModel {
+export interface PlayerModel 
+{
     id: number;
     name: string;
 };
