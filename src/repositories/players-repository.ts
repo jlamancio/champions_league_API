@@ -1,19 +1,77 @@
 import { PlayerModel } from "../models/player-model";
+import { StatisticsModel } from "../models/statistics-model";
 
 const database: PlayerModel[] = [
 
-   { id: 1, name: "Messi" },
-   { id: 2, name: "Ronaldo" },
-   { id: 3, name: "Neymar" },
-   { id: 4, name: "Mbappe" },
-   { id: 5, name: "Lewandowski" },
-   { id: 6, name: "Kane" },
-   { id: 7, name: "Haaland" },
-   { id: 8, name: "Modric" },
-   { id: 9, name: "De Bruyne" },
-   { id: 10, name: "Salah" }
+   {
+      id: 1,
+      name: "Messi",
+      club: "PSG",
+      nationality: "Argentina",
+      position: "Forward",
+      statistics: {
+         Overall: 93,
+         Pace: 92,
+         Shooting: 91,
+         Passing: 90,
+         Dribbling: 95,
+         Defending: 38,
+         Physicality: 65,
+      }
+   },
 
-]
+   {
+      id: 2,
+      name: "Neymar",
+      club: "PSG",
+      nationality: "Brazil",
+      position: "Forward",
+      statistics: {
+         Overall: 93,
+         Pace: 92,
+         Shooting: 91,
+         Passing: 90,
+         Dribbling: 95,
+         Defending: 38,
+         Physicality: 65,
+      }
+   },
+
+   {
+      id: 3,
+      name: "Ronaldo",
+      club: "Inter de Milão",
+      nationality: "Brazil",
+      position: "Forward",
+      statistics: {
+         Overall: 93,
+         Pace: 92,
+         Shooting: 91,
+         Passing: 90,
+         Dribbling: 95,
+         Defending: 38,
+         Physicality: 65,
+      }
+   },
+
+   {
+      id: 4,
+      name: "Levandowski",
+      club: "Barcelona",
+      nationality: "Poland",
+      position: "Forward",
+      statistics: {
+         Overall: 93,
+         Pace: 92,
+         Shooting: 91,
+         Passing: 90,
+         Dribbling: 95,
+         Defending: 38,
+         Physicality: 65,
+      }
+   },
+
+];
 
 export const findAllPlayers = async (): Promise<PlayerModel[]> => {
    return database;
@@ -30,8 +88,19 @@ export const insertPlayer = async (player: PlayerModel) => {
 export const deleteOnePlayer = async (id: number) => {
    const index = database.findIndex((player) => player.id === id)
    if (index !== -1) {
-      console.log(index)
       database.splice(index, 1);
+      return true;
    };
-   return database;
+   return false;
+};
+
+export const findAndModifyPlayer = 
+async (id: number, statistics: StatisticsModel): Promise<StatisticsModel | undefined> => {
+
+   const playerIndex = database.findIndex((player) => player.id === id);
+   if (playerIndex !== -1) {
+      database[playerIndex].statistics = statistics;
+   }
+
+   return database[playerIndex];
 };
